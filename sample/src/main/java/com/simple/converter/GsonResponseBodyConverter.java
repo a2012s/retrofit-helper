@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
-import com.simple.okhttp.Tip;
 import com.xcheng.retrofit.BaseGsonConverter;
 import com.xcheng.retrofit.HttpError;
+import com.xcheng.retrofit.TipHttp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,11 +37,12 @@ final class GsonResponseBodyConverter<T> extends BaseGsonConverter<T> {
             JSONObject jsonObject = new JSONObject(cacheStr);
             final int code = jsonObject.getInt("errorCode");
             final String msg = jsonObject.getString("errorMsg");
-            Tip tip = new Tip(code, msg);
+            TipHttp tip = new TipHttp(code, msg);
             if (code != 0) {
                 throw new HttpError(msg, tip);
+
             }
-            if (Tip.class == rawType) {
+            if (TipHttp.class == rawType) {
                 return (T) tip;
             }
             //这样判断能防止服务端忽略data字段导致jsonObject.get("data")方法奔溃

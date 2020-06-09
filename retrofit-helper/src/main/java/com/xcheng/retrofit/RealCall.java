@@ -2,6 +2,7 @@ package com.xcheng.retrofit;
 
 import android.arch.lifecycle.Lifecycle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.concurrent.Executor;
 
@@ -44,6 +45,7 @@ final class RealCall<T> implements Call<T> {
                 //response.isSuccessful() 不能保证 response.body() != null,反之可以
                 if (response.body() != null) {
                     callSuccess(response.body());
+                    Log.e("logcat",response.message());
                 } else {
                     callFailure(new HttpException(response));
                 }

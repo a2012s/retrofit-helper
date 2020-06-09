@@ -1,14 +1,10 @@
-package com.simple.okhttp;
+package com.xcheng.retrofit;
 
-/**
- * 普通的结果提示 ，code=0代表成功
- * Created by chengxin on 2017/9/26.
- */
-public class Tip {
+public class TipHttp {
     private int code = -1;
     private String msg;
 
-    public Tip(int code, String msg) {
+    public TipHttp(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }

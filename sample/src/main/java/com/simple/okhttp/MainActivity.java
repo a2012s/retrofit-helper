@@ -61,12 +61,13 @@ public class MainActivity extends EasyActivity {
                     .enqueue(new AnimCallback<LoginInfo>(this) {
                         @Override
                         public void onError(Call<LoginInfo> call2, HttpError error) {
-                            Toast.makeText(MainActivity.this, error.msg, Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(MainActivity.this, error.msg+"e"+error.getCode(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onSuccess(Call<LoginInfo> call2, LoginInfo response) {
-                            Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "登录成功"+response.username, Toast.LENGTH_SHORT).show();
                         }
                     });
         }

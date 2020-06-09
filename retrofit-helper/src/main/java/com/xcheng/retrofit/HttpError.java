@@ -1,6 +1,7 @@
 package com.xcheng.retrofit;
 
 import android.support.annotation.Nullable;
+import android.widget.TimePicker;
 
 /**
  * 通用的错误信息，一般请求是失败只需要弹出一些错误信息即可,like{@link retrofit2.HttpException}
@@ -12,6 +13,16 @@ public final class HttpError extends RuntimeException {
      * 展示在前端的错误描述信息
      */
     public String msg;
+
+    public int code;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     /**
      * <p>
@@ -33,11 +44,14 @@ public final class HttpError extends RuntimeException {
         super(msg);
         if (body instanceof Throwable) {
             initCause((Throwable) body);
+        } else if (body instanceof TipHttp) {
+            setCode(((TipHttp) body).getCode());
         }
         //FastPrintWriter#print(String str)
         this.msg = msg != null ? msg : "null";
         this.body = body;
     }
+
 
     /**
      * 保证和msg一致
